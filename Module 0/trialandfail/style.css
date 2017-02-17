@@ -1,0 +1,96 @@
+body {
+    background: #3c97ff;
+}
+
+#Calculator {
+    width: 160px;
+    margin: auto;
+}
+
+button {
+    border: 0;
+}
+
+#Result {
+    display: block;
+    font-family: sans-serif;
+    width: 100%;
+    height: 40px;
+    text-align: right;
+    background: #3d3d3d;
+    color: #e7e7ff;
+    font-size: 20px;
+}
+
+#Result:hover {
+    cursor: text;
+}
+
+button {
+    margin: 1px;
+    border-radius:4px;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+.largeButton {
+    display: block;
+    float: left;
+    font-family: sans-serif;
+    width: 78px;
+    height: 40px;
+    text-align: center;
+    background: green;
+    color: black;
+}
+
+.largeButton:hover {
+    background: #16a12b;
+}
+
+.smallButton {
+    display: block;
+    float: left;
+    font-family: sans-serif;
+    width: 38px;
+    height: 40px;
+    text-align: center;
+    background: green;
+    color: black;
+}
+
+.smallButton:hover {
+    background: #16a12b;
+}
+
+.numberButton {
+    display: block;
+    float: left;
+    font-family: sans-serif;
+    width: 38px;
+    height: 40px;
+    text-align: center;
+    background: orange;
+    color: black;
+}
+
+.numberButton:hover{
+    background: #ff964a;
+}
+
+.zeroButton {
+    display: block;
+    float: left;
+    font-family: sans-serif;
+    width: 38px;
+    height: 40px;
+    text-align: center;
+    background: orange;
+    color: black;
+}
+
+.zeroButton:hover{
+    background: #ff964a;
+}
