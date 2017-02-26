@@ -6,9 +6,9 @@
         <shared-cache-mode>NONE</shared-cache-mode>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://JORIS_LAPTOP\SQLSERVER;databaseName=examplesDB"/>
-            <property name="javax.persistence.jdbc.user" value="sa"/>
-            <property name="javax.persistence.jdbc.password" value="hoi"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://mssql.fhict.local"/>
+            <property name="javax.persistence.jdbc.user" value="dbi329146"/>
+            <property name="javax.persistence.jdbc.password" value="hoihoi123"/>
             <property name="eclipselink.ddl-generation" value="create-tables"/>
             <property name="eclipselink.logging.logger" value="DefaultLogger"/>
             <property name="eclipselink.logging.level" value="FINE"/>

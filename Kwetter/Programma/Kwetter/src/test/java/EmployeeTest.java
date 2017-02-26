@@ -8,6 +8,27 @@ import javax.persistence.*;
  */
 public class EmployeeTest {
 
+    @Test
+    public void FirstTest(){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("EmployeeUnit");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        Employee employee = new Employee();
+        employee.setName("Empl1");
+        employee.setSalary(1000000);
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(employee);
+        entityManager.getTransaction().commit();
+        System.out.println("Program completed...");
+    }
+
+    @Test
+    public void SecondTest(){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("EmployeeUnit");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.createNamedQuery("employee.all").getResultList();
+    }
 
     @Test
     public void SuccessTest(){
