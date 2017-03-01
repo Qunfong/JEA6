@@ -11,6 +11,7 @@
     <name>Kwetter</name>
     <url>http://maven.apache.org</url>
     <build>
+        <finalName>JEA6Kwetter</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
