@@ -1,0 +1,111 @@
+package Domain;
+
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+/**
+ * Created by Joris on 3-3-2017.
+ */
+public class UserTest {
+    User user1;
+    User user2;
+    User user3;
+
+    @Before
+    public void setUp() throws Exception {
+        user1 = new User(1, "http://www.img.nl/1.jpg", "nr1", "I'm number one", "http://www.nr1.nl/", "home");
+        user2 = new User(2, "http://www.img.nl/2.jpg", "nr2", "I'm number two", "http://www.nr2.nl/", "work");
+        user3 = new User();
+    }
+
+    @Test
+    public void getId() throws Exception {
+        Assert.assertEquals( "User1 didn't have the id 1.", 1, user1.getId());
+        Assert.assertEquals( "User2 didn't have the id 2.", 2, user2.getId());
+     }
+
+    @Test
+    public void getPhoto() throws Exception {
+        Assert.assertEquals("User1 didn't have the photo http://www.img.nl/1.jpg.", "http://www.img.nl/1.jpg", user1.getPhoto());
+        Assert.assertEquals("User2 didn't have the photo http://www.img.nl/2.jpg.", "http://www.img.nl/2.jpg", user2.getPhoto());
+        Assert.assertNull("User3 had a photo when there shouldn't be one.", user3.getPhoto());
+    }
+
+    @Test
+    public void setPhoto() throws Exception {
+        user3.setPhoto("http://www.img.nl/3.jpg");
+        Assert.assertEquals("Photo isn't correctly set to the user.", "http://www.img.nl/3.jpg", user3.getPhoto());
+    }
+
+    @Test
+    public void getName() throws Exception {
+        Assert.assertEquals("User1 didn't have the name nr1.", "nr1", user1.getName());
+        Assert.assertEquals("User2 didn't have the name nr2.", "nr2", user2.getName());
+        Assert.assertNull("User3 had a name when there shouldn't be one.", user3.getName());
+    }
+
+    @Test
+    public void setName() throws Exception {
+        user3.setName("nr3");
+        Assert.assertEquals("Name isn't correctly set to the user.", "nr3", user3.getName());
+    }
+
+    @Test
+    public void getBio() throws Exception {
+        Assert.assertEquals("User1 didn't have the bio I'm number one.", "I'm number one", user1.getBio());
+        Assert.assertEquals("User2 didn't have the bio I'm number two.", "I'm number two", user2.getBio());
+        Assert.assertNull("User3 had a bio when there shouldn't be one.", user3.getBio());
+    }
+
+    @Test
+    public void setBio() throws Exception {
+        user3.setBio("I'm number three");
+        Assert.assertEquals("Bio isn't correctly set to the user.", "I'm number three", user3.getBio());
+    }
+
+    @Test
+    public void getWeb() throws Exception {
+        Assert.assertEquals("User1 didn't have the web http://www.nr1.nl/.", "http://www.nr1.nl/", user1.getWeb());
+        Assert.assertEquals("User2 didn't have the web http://www.nr2.nl/.", "http://www.nr2.nl/", user2.getWeb());
+        Assert.assertNull("User3 had a web when there shouldn't be one.", user3.getWeb());
+    }
+
+    @Test
+    public void setWeb() throws Exception {
+        user3.setWeb("http://www.nr3.nl/");
+        Assert.assertEquals("Web isn't correctly set to the user.", "http://www.nr3.nl/", user3.getWeb());
+    }
+
+    @Test
+    public void getLocation() throws Exception {
+        Assert.assertEquals("User1 didn't have the location home.", "home", user1.getLocation());
+        Assert.assertEquals("User2 didn't have the location work.", "work", user2.getLocation());
+        Assert.assertNull("User3 had a location when there shouldn't be one.", user3.getLocation());
+    }
+
+    @Test
+    public void setLocation() throws Exception {
+        user3.setLocation("school");
+        Assert.assertEquals("Location isn't correctly set to the user.", "school", user3.getLocation());
+    }
+
+    @Test
+    public void getRole() throws Exception {
+        Assert.assertEquals("User1 didn't have the role USER.", RoleEnum.USER, user1.getRole());
+        Assert.assertEquals("User2 didn't have the role USER.", RoleEnum.USER, user2.getRole());
+        Assert.assertEquals("User3 didn't have the role USER.", RoleEnum.USER, user3.getRole());
+    }
+
+    @Test
+    public void setRole() throws Exception {
+        user1.setRole(RoleEnum.MODERATOR);
+        Assert.assertEquals("Role MODERATOR hasn't been set correctly to User1.", RoleEnum.MODERATOR, user1.getRole());
+        user2.setRole(RoleEnum.ADMIN);
+        Assert.assertEquals("Role ADMIN hasn't been set correctly to User2.", RoleEnum.ADMIN, user2.getRole());
+    }
+
+}
