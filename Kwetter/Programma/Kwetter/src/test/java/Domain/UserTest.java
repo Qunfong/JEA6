@@ -1,11 +1,8 @@
 package Domain;
 
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Joris on 3-3-2017.
@@ -17,8 +14,8 @@ public class UserTest {
 
     @Before
     public void setUp() throws Exception {
-        user1 = new User(1, "http://www.img.nl/1.jpg", "nr1", "I'm number one", "http://www.nr1.nl/", "home");
-        user2 = new User(2, "http://www.img.nl/2.jpg", "nr2", "I'm number two", "http://www.nr2.nl/", "work");
+        user1 = new User(1, "http://www.img.nl/1.jpg", "nr1", "I'm number one", "http://www.nr1.nl/", "home", "ww1");
+        user2 = new User(2, "http://www.img.nl/2.jpg", "nr2", "I'm number two", "http://www.nr2.nl/", "work", "ww2");
         user3 = new User();
     }
 
@@ -95,17 +92,34 @@ public class UserTest {
 
     @Test
     public void getRole() throws Exception {
-        Assert.assertEquals("User1 didn't have the role USER.", RoleEnum.USER, user1.getRole());
-        Assert.assertEquals("User2 didn't have the role USER.", RoleEnum.USER, user2.getRole());
-        Assert.assertEquals("User3 didn't have the role USER.", RoleEnum.USER, user3.getRole());
+        Assert.assertEquals("User1 didn't have the role User.", "User", user1.getGroup().getGroupName());
+        Assert.assertEquals("User2 didn't have the role User.", "User", user2.getGroup().getGroupName());
+        Assert.assertEquals("User3 didn't have the role User.", "User", user3.getGroup().getGroupName());
     }
 
     @Test
     public void setRole() throws Exception {
-        user1.setRole(RoleEnum.MODERATOR);
-        Assert.assertEquals("Role MODERATOR hasn't been set correctly to User1.", RoleEnum.MODERATOR, user1.getRole());
-        user2.setRole(RoleEnum.ADMIN);
-        Assert.assertEquals("Role ADMIN hasn't been set correctly to User2.", RoleEnum.ADMIN, user2.getRole());
+        Group user1Group = new Group();
+        user1Group.setGroupName("Moderator");
+        user1.setGroup(user1Group);
+        Assert.assertEquals("Role Moderator hasn't been set correctly to User1.", "Moderator", user1.getGroup().getGroupName());
+
+        Group user2Group = new Group();
+        user2Group.setGroupName("Admin");
+        user2.setGroup(user2Group);
+        Assert.assertEquals("Role Admin hasn't been set correctly to User2.", "Admin", user2.getGroup().getGroupName());
     }
 
+    @Test
+    public void getPassword() throws Exception {
+        Assert.assertEquals("User1 didn't have the password ww1", "ww1", user1.getPassword());
+        Assert.assertEquals("User2 didn't have the password ww2.", "ww2", user2.getPassword());
+        Assert.assertNull("User3 had a password when there shouldn't be one.", user3.getPassword());
+    }
+
+    @Test
+    public void setPassword() throws Exception {
+        user3.setPassword("ww3");
+        Assert.assertEquals("Password isn't correctly set to the user.", "ww3", user3.getPassword());
+    }
 }

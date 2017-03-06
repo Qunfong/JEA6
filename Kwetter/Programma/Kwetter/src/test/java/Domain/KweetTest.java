@@ -23,9 +23,9 @@ public class KweetTest {
 
     @Before
     public void setUp() throws Exception {
-        user1 = new User(1, null, "user1", null, null, null);
-        user2 = new User(2, null, "user2", "I'm user2.", "http://user2.nl/", "home");
-        user3 = new User(3, "img.jpg", "NAME", null, null, null);
+        user1 = new User(1, null, "user1", null, null, null, null);
+        user2 = new User(2, null, "user2", "I'm user2.", "http://user2.nl/", "home", null);
+        user3 = new User(3, "img.jpg", "NAME", null, null, null, null);
         kweet1 = new Kweet(1, "HELLO EVERYONE", user1);
         kweet2 = new Kweet(2, "HEY EVERYBODY", user2);
         kweet3 = new Kweet(3, "Excuse me for the shouting.", user2);
