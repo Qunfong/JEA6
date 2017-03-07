@@ -25,7 +25,7 @@ public class RelationDAO {
     public List<Relation> getFollowers(User user) {
         ArrayList<Relation> followerRelations = new ArrayList<>();
         for (Relation relation : relations) {
-            if (relation.getFollower().getId() == user.getId())
+            if (relation.getFollowing().getId() == user.getId())
                 followerRelations.add(relation);
 
         }
@@ -35,7 +35,7 @@ public class RelationDAO {
     public List<Relation> getFollowing(User user){
         ArrayList<Relation> followingRelations = new ArrayList<>();
         for (Relation relation : relations) {
-            if (relation.getFollowing().getId() == user.getId())
+            if (relation.getFollower().getId() == user.getId())
                 followingRelations.add(relation);
 
         }
