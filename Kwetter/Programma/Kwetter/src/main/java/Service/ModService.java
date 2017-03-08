@@ -1,8 +1,9 @@
 package Service;
 
+import DAO.DAOManager;
+import Domain.Group;
 import Domain.Kweet;
 import Domain.User;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 
@@ -18,7 +19,15 @@ public class ModService {
      * @param role   the role the user get
      */
     public void changeRole(int userId, String role) {
-        throw new NotImplementedException();
+        User user = DAOManager.userDAO.get(userId);
+
+        if (user.equals(null))
+            throw new NullPointerException("Can't find the user!");
+
+        Group group = new Group();
+        group.setGroupName(role);
+        user.setGroup(group);
+        DAOManager.userDAO.update(user);
     }
 
     /**
@@ -27,7 +36,7 @@ public class ModService {
      * @return the list of all users with its roles
      */
     public List<User> getAllUsers() {
-        throw new NotImplementedException();
+        return DAOManager.userDAO.getAll();
     }
 
     /**
@@ -36,15 +45,15 @@ public class ModService {
      * @return the list of all kweets
      */
     public List<Kweet> getAllKweets() {
-        throw new NotImplementedException();
+        return DAOManager.kweetDAO.getAll();
     }
 
     /**
-     * Lets a mod delete a kweet
+     * Lets a mod or admin delete a kweet
      *
      * @param kweet the kweet that has to be deleted
      */
-    public void deleteKweet(Kweet kweet){
-        throw new NotImplementedException();
+    public void deleteKweet(Kweet kweet) {
+        DAOManager.kweetDAO.delete(kweet);
     }
 }

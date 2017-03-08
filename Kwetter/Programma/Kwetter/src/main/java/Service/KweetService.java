@@ -1,6 +1,8 @@
 package Service;
 
+import DAO.DAOManager;
 import Domain.Kweet;
+import Domain.User;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
@@ -16,7 +18,7 @@ public class KweetService {
      * @param kweet to be created.
      */
     public void createKweet(Kweet kweet) {
-        throw new NotImplementedException();
+        DAOManager.kweetDAO.create(kweet);
     }
 
     /**
@@ -25,8 +27,10 @@ public class KweetService {
      * @param kweet  the kweet to be liked
      * @param userId the id of the user that likes the kweet
      */
-    public void likeKweet(Kweet kweet, int userId) {
-        throw new NotImplementedException();
+    public void likeKweet(Kweet kweet, int userId) throws Exception {
+        User liker = DAOManager.userDAO.get(userId);
+
+        kweet.addLiker(liker);
     }
 
     /**
@@ -38,7 +42,8 @@ public class KweetService {
      * @return the generated timeline based on a list of kweets
      */
     public List<Kweet> getTimeline(int userId) {
-        throw new NotImplementedException();
+        User user = DAOManager.userDAO.get(userId);
+        return DAOManager.kweetDAO.timeline(user);
     }
 
     /**
@@ -51,7 +56,8 @@ public class KweetService {
      * @return the latest amount kweets of the given user
      */
     public List<Kweet> latestKweets(int userId, int amount) {
-        throw new NotImplementedException();
+        User user = DAOManager.userDAO.get(userId);
+        return DAOManager.kweetDAO.latest(user, amount);
     }
 
     /**
@@ -61,6 +67,6 @@ public class KweetService {
      * @return the kweets where the message match the keyword
      */
     public List<Kweet> searchKweet(String keyword){
-        throw new NotImplementedException();
+        return DAOManager.kweetDAO.search(keyword);
     }
 }

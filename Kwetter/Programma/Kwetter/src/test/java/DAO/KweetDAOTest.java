@@ -18,6 +18,7 @@ public class KweetDAOTest {
     User user2;
     Kweet kweet1;
     Kweet kweet2;
+    Kweet kweet3;
     Relation relation1;
 
     @Before
@@ -25,9 +26,12 @@ public class KweetDAOTest {
         user1 = new User(1, null, "user1", null, null, null, null);
         user2 = new User(2, null, "user2", null, null, null, null);
         kweet1 = new Kweet(1, "Hello everybody", user1);
-        kweet2 = new Kweet(2, "Hey all!", user2);
         DAOManager.kweetDAO.create(kweet1);
+        kweet2 = new Kweet(2, "Hey all!", user2);
         DAOManager.kweetDAO.create(kweet2);
+        Thread.sleep(20);
+        kweet3 = new Kweet(3, "Hey ho!", user2);
+        DAOManager.kweetDAO.create(kweet3);
         relation1 = new Relation(user1, user2);
         DAOManager.relationDAO.follow(relation1);
     }
@@ -39,8 +43,8 @@ public class KweetDAOTest {
 
     @Test
     public void create() throws Exception {
-        Kweet kweet3 = new Kweet(2, "Hey user1!", user2);
-        DAOManager.kweetDAO.create(kweet3);
+        Kweet kweet4 = new Kweet(3, "Hey user1!", user2);
+        DAOManager.kweetDAO.create(kweet4);
     }
 
     @Test
@@ -52,7 +56,13 @@ public class KweetDAOTest {
 
     @Test
     public void timeline() throws Exception {
-        Assert.assertEquals("Another amount of kweets received than expected.", 2, DAOManager.kweetDAO.timeline(user1).size());
+        Assert.assertEquals("Another amount of kweets received than expected.", 3, DAOManager.kweetDAO.timeline(user1).size());
+    }
+
+    @Test
+    public void latest() throws Exception {
+        Assert.assertEquals("Latest kweet wasn't kweet3.", kweet3, DAOManager.kweetDAO.latest(user2, 1).get(0));
+        Assert.assertEquals("Second latest kweet wasn't kweet2.", kweet2, DAOManager.kweetDAO.latest(user2, 2).get(1));
     }
 
     @Test
@@ -62,13 +72,13 @@ public class KweetDAOTest {
 
     @Test
     public void getAll() throws Exception {
-        Assert.assertEquals("Received a different amount of kweets than expected.", 2, DAOManager.kweetDAO.getAll().size());
+        Assert.assertEquals("Received a different amount of kweets than expected.", 3, DAOManager.kweetDAO.getAll().size());
     }
 
     @Test
     public void delete() throws Exception {
         DAOManager.kweetDAO.delete(kweet1);
-        Assert.assertEquals("Kweet wasn't deleted!", 1, DAOManager.kweetDAO.getAll().size());
+        Assert.assertEquals("Kweet wasn't deleted!", 2, DAOManager.kweetDAO.getAll().size());
     }
 
 }
