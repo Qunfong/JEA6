@@ -1,6 +1,7 @@
 package DAO;
 
 import Domain.Kweet;
+import Domain.Relation;
 import Domain.User;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class KweetDAO {
 
     private ArrayList<Kweet> kweets;
 
-    public KweetDAO(){
+    public KweetDAO() {
         kweets = new ArrayList<>();
     }
 
@@ -31,28 +32,32 @@ public class KweetDAO {
 
     public List<Kweet> timeline(User user) {
         ArrayList<Kweet> timelineKweets = new ArrayList<>();
+        ArrayList<User> followingUsers = new ArrayList<>();
+        for(Relation relation: DAOManager.relationDAO.getFollowing(user)){
+            followingUsers.add(relation.getFollowing());
+        }
+
         for (Kweet kweet : kweets) {
-            //TODO: add kweets from followings
-            if(kweet.getUser().equals(user))
+            if (kweet.getUser().equals(user) || followingUsers.contains(kweet.getUser()))
                 timelineKweets.add(kweet);
         }
         return Collections.unmodifiableList(timelineKweets);
     }
 
-    public List<Kweet> search(String keyword){
+    public List<Kweet> search(String keyword) {
         ArrayList<Kweet> foundKweets = new ArrayList<>();
-        for (Kweet kweet: kweets){
-            if(kweet.getMessage().contains(keyword))
+        for (Kweet kweet : kweets) {
+            if (kweet.getMessage().contains(keyword))
                 foundKweets.add(kweet);
         }
         return Collections.unmodifiableList(foundKweets);
     }
 
-    public List<Kweet> getAll(){
+    public List<Kweet> getAll() {
         return Collections.unmodifiableList(kweets);
     }
 
-    public void delete(Kweet kweet){
+    public void delete(Kweet kweet) {
         kweets.remove(kweet);
     }
 }

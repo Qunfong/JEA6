@@ -18,7 +18,6 @@ public class RelationDAOTest {
     User user3;
     Relation relation1;
     Relation relation2;
-    RelationDAO relationDAO;
 
     @Before
     public void setUp() throws Exception {
@@ -27,32 +26,31 @@ public class RelationDAOTest {
         user3 = new User(3, null, "user3", null, null, null, null);
         relation1 = new Relation(user1, user2);
         relation2 = new Relation(user2, user1);
-        relationDAO = new RelationDAO();
-        relationDAO.follow(relation1);
-        relationDAO.follow(relation2);
+        DAOManager.relationDAO.follow(relation1);
+        DAOManager.relationDAO.follow(relation2);
     }
 
     @After
     public void tearDown() throws Exception {
-
+        DAOManager.clearDAOs();
     }
 
     @Test
     public void follow() throws Exception {
         Relation relation3 = new Relation(user1, user3);
-        relationDAO.follow(relation3);
+        DAOManager.relationDAO.follow(relation3);
     }
 
     @Test
     public void getFollowers() throws Exception {
-        Assert.assertEquals("Received the wrong relation and wrong follower", user1, relationDAO.getFollowers(user2).get(0).getFollower());
-        Assert.assertEquals("Received the wrong relation and wrong follower", user2, relationDAO.getFollowers(user1).get(0).getFollower());
+        Assert.assertEquals("Received the wrong relation and wrong follower", user1, DAOManager.relationDAO.getFollowers(user2).get(0).getFollower());
+        Assert.assertEquals("Received the wrong relation and wrong follower", user2, DAOManager.relationDAO.getFollowers(user1).get(0).getFollower());
     }
 
     @Test
     public void getFollowing() throws Exception {
-        Assert.assertEquals("Received the wrong relation and wrong following", user2, relationDAO.getFollowing(user1).get(0).getFollowing());
-        Assert.assertEquals("Received the wrong relation and wrong following", user1, relationDAO.getFollowing(user2).get(0).getFollowing());
+        Assert.assertEquals("Received the wrong relation and wrong following", user2, DAOManager.relationDAO.getFollowing(user1).get(0).getFollowing());
+        Assert.assertEquals("Received the wrong relation and wrong following", user1, DAOManager.relationDAO.getFollowing(user2).get(0).getFollowing());
     }
 
 }
