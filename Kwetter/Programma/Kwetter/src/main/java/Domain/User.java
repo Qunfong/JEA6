@@ -11,20 +11,22 @@ public class User {
     private String bio;
     private String web;
     private String location;
-    private RoleEnum role;
+    private Group group;
+    private String password;
 
     public User() {
-        this.role = RoleEnum.USER;
+        this.group = new Group();
     }
 
-    public User(int id, String photo, String name, String bio, String web, String location) {
+    public User(int id, String photo, String name, String bio, String web, String location, String password) {
         this.id = id;
         this.photo = photo;
         this.name = name;
         this.bio = bio;
         this.web = web;
         this.location = location;
-        this.role = RoleEnum.USER;
+        this.group = new Group();
+        this.password = password;
     }
 
     public int getId() {
@@ -71,11 +73,19 @@ public class User {
         this.location = location;
     }
 
-    public RoleEnum getRole() {
-        return role;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setRole(RoleEnum role) {
-        this.role = role;
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

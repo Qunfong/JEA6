@@ -7,5 +7,11 @@
       <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
       <jdbc-url>jdbc:sqlserver://JORIS_LAPTOP\SQLSERVER;databaseName=examplesDB</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="SCHOOL" uuid="b82b70c6-53d0-4a1a-a2a5-f648179b83dd">
+      <driver-ref>sqlserver.ms</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://mssql.fhict.local</jdbc-url>
+    </data-source>
   </component>
 </project>

@@ -8,7 +8,7 @@ import javax.persistence.*;
  */
 public class EmployeeTest {
 
-    @Test
+    //@Test
     public void FirstTest(){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("EmployeeUnit");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -23,7 +23,7 @@ public class EmployeeTest {
         System.out.println("Program completed...");
     }
 
-    @Test
+    //@Test
     public void SecondTest(){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("EmployeeUnit");
         EntityManager entityManager = entityManagerFactory.createEntityManager();

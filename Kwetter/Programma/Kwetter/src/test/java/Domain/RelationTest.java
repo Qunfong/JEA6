@@ -18,8 +18,8 @@ public class RelationTest {
     @Before
     public void setUp() throws Exception {
         new Relation();
-        user1 = new User(1, null, "user1", null, null, null);
-        user2 = new User(2, null, "user2", null, null, null);
+        user1 = new User(1, null, "user1", null, null, null, null);
+        user2 = new User(2, null, "user2", null, null, null, null);
         relation1 = new Relation(user1, user2);
         relation2 = new Relation(user2, user1);
     }
