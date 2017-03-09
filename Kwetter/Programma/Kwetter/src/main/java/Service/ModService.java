@@ -18,10 +18,10 @@ public class ModService {
      * @param userId the id of the user where the role will be changed of
      * @param role   the role the user get
      */
-    public void changeRole(int userId, String role) {
+    public void changeRole(int userId, String role) throws NullPointerException {
         User user = DAOManager.userDAO.get(userId);
 
-        if (user.equals(null))
+        if (user == null)
             throw new NullPointerException("Can't find the user!");
 
         Group group = new Group();
@@ -53,7 +53,12 @@ public class ModService {
      *
      * @param kweet the kweet that has to be deleted
      */
-    public void deleteKweet(Kweet kweet) {
-        DAOManager.kweetDAO.delete(kweet);
+    public void deleteKweet(int kweetId) throws NullPointerException {
+        Kweet kweetToDelete = DAOManager.kweetDAO.get(kweetId);
+
+        if (kweetToDelete == null)
+            throw new NullPointerException("Can't find the kweet!");
+
+        DAOManager.kweetDAO.delete(kweetToDelete);
     }
 }

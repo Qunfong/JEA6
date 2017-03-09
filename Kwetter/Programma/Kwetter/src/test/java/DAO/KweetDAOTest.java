@@ -76,6 +76,12 @@ public class KweetDAOTest {
     }
 
     @Test
+    public void get() throws Exception {
+        Assert.assertEquals("Received the wrong kweet.", kweet1, DAOManager.kweetDAO.get(1));
+        Assert.assertNull("Received a kweet.", DAOManager.kweetDAO.get(40));
+    }
+
+    @Test
     public void delete() throws Exception {
         DAOManager.kweetDAO.delete(kweet1);
         Assert.assertEquals("Kweet wasn't deleted!", 2, DAOManager.kweetDAO.getAll().size());

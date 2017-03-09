@@ -81,6 +81,15 @@ public class KweetDAO {
         return Collections.unmodifiableList(kweets);
     }
 
+    public Kweet get(int kweetId){
+        for (Kweet kweet: kweets){
+            if(kweet.getId() == kweetId){
+                return kweet;
+            }
+        }
+        return null;
+    }
+
     public void delete(Kweet kweet) {
         kweets.remove(kweet);
     }
