@@ -1,9 +1,14 @@
 package Domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Created by Joris on 3-3-2017.
  */
+@Entity
 public class Group {
+    @Id
     private String groupName;
 
     /**

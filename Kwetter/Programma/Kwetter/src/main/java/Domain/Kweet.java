@@ -1,16 +1,27 @@
 package Domain;
 
+import javax.persistence.*;
 import java.util.Calendar;
 import java.util.HashSet;
 
 /**
  * Created by Joris on 3-3-2017.
  */
+
+@Entity
+@Table(name="kweet")
 public class Kweet {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name="message")
     private String message;
+    @ManyToOne
     private User user;
+    @Column(name="date")
     private Calendar date;
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="likers", joinColumns = @JoinColumn(name="kweet_id"), inverseJoinColumns = @JoinColumn(name="user_id"))
     private HashSet<User> likers;
 
     public Kweet() {
@@ -51,7 +62,7 @@ public class Kweet {
     }
 
     public void addLiker(User user) throws Exception {
-        if(!likers.add(user))
+        if (!likers.add(user))
             throw new Exception("The user already liked this kweet.");
     }
 }

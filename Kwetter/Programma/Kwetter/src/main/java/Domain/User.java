@@ -1,17 +1,28 @@
 package Domain;
 
+import javax.persistence.*;
+
 /**
  * Created by Joris on 3-3-2017.
  */
+@Entity
 public class User {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "photo")
     private String photo;
+    @Column(name = "name")
     private String name;
+    @Column(name = "bio")
     private String bio;
+    @Column(name = "web")
     private String web;
+    @Column(name = "location")
     private String location;
+    @ManyToOne
     private Group group;
+    @Column(name = "password")
     private String password;
 
     public User() {
