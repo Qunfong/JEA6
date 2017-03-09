@@ -5,20 +5,19 @@ import Domain.User;
 import JSONObjects.RoleJSON;
 import Service.ModService;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import java.util.List;
 
 /**
  * Created by Joris on 9-3-2017.
  */
-
+@Stateless
 @Path("mod")
 public class ModREST {
+    @Inject
     ModService modService;
-
-    public ModREST() {
-        modService = new ModService();
-    }
 
     @POST
     @Consumes("application/json")

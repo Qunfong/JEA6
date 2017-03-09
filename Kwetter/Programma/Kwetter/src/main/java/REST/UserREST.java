@@ -5,20 +5,21 @@ import JSONObjects.RelationJSON;
 import JSONObjects.UserJSON;
 import Service.UserService;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import java.util.List;
 
 /**
  * Created by Joris on 9-3-2017.
  */
+@Stateless
 @Path("user")
 public class UserREST {
 
+    @Inject
     UserService userService;
 
-    public UserREST() {
-        userService = new UserService();
-    }
 
     @POST
     @Consumes("application/json")
@@ -53,14 +54,14 @@ public class UserREST {
     @GET
     @Produces("application/json")
     @Path("getfollowers")
-    public List<User> getFollowers(@QueryParam("user") int userId) throws Exception{
+    public List<User> getFollowers(@QueryParam("user") int userId) throws Exception {
         return userService.getFollowers(userId);
     }
 
     @GET
     @Produces("application/json")
     @Path("getfollowing")
-    public List<User> getFollowing(@QueryParam("user") int userId) throws Exception{
+    public List<User> getFollowing(@QueryParam("user") int userId) throws Exception {
         return userService.getFollowing(userId);
     }
 }

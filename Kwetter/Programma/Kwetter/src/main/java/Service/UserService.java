@@ -4,6 +4,7 @@ import DAO.DAOManager;
 import Domain.Relation;
 import Domain.User;
 
+import javax.ejb.Stateless;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Created by Joris on 4-3-2017.
  */
+@Stateless
 public class UserService {
 
     /**

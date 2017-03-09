@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="EmployeeTest" time="0" errors="0" skipped="0">
+<testsuite tests="21" failures="0" name="Service.UserServiceTest" time="0" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\tools\jdk1.8.0_111\jre\bin"/>
@@ -63,5 +63,25 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="EmployeeTest" name="SuccessTest" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="updateUserUnknownUserException" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="updateUserExistingUserNameException" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="follow" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="followNonExistingFollowerException" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="getFollowersNoFollowingException" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="updateUser" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="getUser" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="createUserNoUsernameException" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="createUserIdAlreadyExists" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="updateUserChangeGroupNameException" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="getFollowers" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="getFollowing" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="createUserNoPasswordException" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="createUserEmptyUsernameException" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="createUser" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="createUserNameAlreadyExists" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="createUserEmptyPasswordException" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="followAlreadyFollowedException" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="followNonExistingFollowingException" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="getUser1" time="0"/>
+  <testcase classname="Service.UserServiceTest" name="getFollowingNoFollowerException" time="0"/>
 </testsuite>

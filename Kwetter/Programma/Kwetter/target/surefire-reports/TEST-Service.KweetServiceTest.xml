@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="EmployeeTest" time="0" errors="0" skipped="0">
+<testsuite tests="10" failures="0" name="Service.KweetServiceTest" time="0" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\tools\jdk1.8.0_111\jre\bin"/>
@@ -63,5 +63,14 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="EmployeeTest" name="SuccessTest" time="0"/>
+  <testcase classname="Service.KweetServiceTest" name="likeKweetAlreadyLikes" time="0"/>
+  <testcase classname="Service.KweetServiceTest" name="searchKweet" time="0"/>
+  <testcase classname="Service.KweetServiceTest" name="createKweet" time="0"/>
+  <testcase classname="Service.KweetServiceTest" name="likeKweet" time="0"/>
+  <testcase classname="Service.KweetServiceTest" name="likeKweetNonExistingKweetException" time="0"/>
+  <testcase classname="Service.KweetServiceTest" name="getTimeline" time="0"/>
+  <testcase classname="Service.KweetServiceTest" name="latestKweets" time="0"/>
+  <testcase classname="Service.KweetServiceTest" name="likeKweetNonExistingUserException" time="0"/>
+  <testcase classname="Service.KweetServiceTest" name="latestKweetsNonExistingUserException" time="0"/>
+  <testcase classname="Service.KweetServiceTest" name="getTimelineNonExistingUserException" time="0"/>
 </testsuite>

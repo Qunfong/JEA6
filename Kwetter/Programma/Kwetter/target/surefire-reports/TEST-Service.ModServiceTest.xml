@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="EmployeeTest" time="0" errors="0" skipped="0">
+<testsuite tests="6" failures="0" name="Service.ModServiceTest" time="0" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\tools\jdk1.8.0_111\jre\bin"/>
@@ -63,5 +63,10 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="EmployeeTest" name="SuccessTest" time="0"/>
+  <testcase classname="Service.ModServiceTest" name="changeRole" time="0"/>
+  <testcase classname="Service.ModServiceTest" name="deleteKweet" time="0"/>
+  <testcase classname="Service.ModServiceTest" name="getAllKweets" time="0"/>
+  <testcase classname="Service.ModServiceTest" name="getAllUsers" time="0"/>
+  <testcase classname="Service.ModServiceTest" name="deleteKweetNotFoundException" time="0"/>
+  <testcase classname="Service.ModServiceTest" name="changeRoleUserNotFoundException" time="0"/>
 </testsuite>

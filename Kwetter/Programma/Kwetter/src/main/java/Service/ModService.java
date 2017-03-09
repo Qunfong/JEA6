@@ -5,11 +5,13 @@ import Domain.Group;
 import Domain.Kweet;
 import Domain.User;
 
+import javax.ejb.Stateless;
 import java.util.List;
 
 /**
  * Created by Joris on 4-3-2017.
  */
+@Stateless
 public class ModService {
 
     /**

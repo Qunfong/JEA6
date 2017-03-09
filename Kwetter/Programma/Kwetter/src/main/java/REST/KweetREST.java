@@ -7,22 +7,22 @@ import JSONObjects.LikeJSON;
 import Service.KweetService;
 import Service.UserService;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import java.util.List;
 
 /**
  * Created by Joris on 9-3-2017.
  */
+@Stateless
 @Path("kweet")
 public class KweetREST {
 
+    @Inject
     KweetService kweetService;
+    @Inject
     UserService userService;
-
-    public KweetREST() {
-        kweetService = new KweetService();
-        userService = new UserService();
-    }
 
     @POST
     @Consumes("application/json")

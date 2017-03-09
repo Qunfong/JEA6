@@ -5,12 +5,14 @@ import Domain.Kweet;
 import Domain.User;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import javax.ejb.Stateless;
 import javax.validation.constraints.Null;
 import java.util.List;
 
 /**
  * Created by Joris on 4-3-2017.
  */
+@Stateless
 public class KweetService {
 
     /**
