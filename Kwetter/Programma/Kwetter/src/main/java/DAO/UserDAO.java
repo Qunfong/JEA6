@@ -22,11 +22,14 @@ public class UserDAO {
     }
 
     public void update(User user) {
+        User userToRemove = new User();
         for (User usersUser: users){
-            if (user.getId() == usersUser.getId()){
-                usersUser = user;
+            if (user.getId() == usersUser.getId()) {
+                userToRemove = usersUser;
             }
         }
+        users.remove(userToRemove);
+        users.add(user);
     }
 
     public User get(int id) {

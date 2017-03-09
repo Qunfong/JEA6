@@ -80,8 +80,9 @@ public class UserServiceTest {
 
     @Test
     public void updateUser() throws Exception {
-        user1.setWeb("user1.nl");
-        userService.updateUser(user1);
+        User user4 = new User(1, null, "user1", null, "user1.nl", null, "password");
+        userService.updateUser(user4);
+        Assert.assertEquals("Web isn't set for user1.", "user1.nl", userService.getUser(1).getWeb());
     }
 
     @Test(expected = NullPointerException.class)
