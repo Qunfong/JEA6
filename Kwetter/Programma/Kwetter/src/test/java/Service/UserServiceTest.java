@@ -85,11 +85,6 @@ public class UserServiceTest {
         Assert.assertEquals("Web isn't set for user1.", "user1.nl", userService.getUser(1).getWeb());
     }
 
-    @Test
-    public void failTest() {
-        Assert.assertTrue(false);
-    }
-
     @Test(expected = NullPointerException.class)
     public void updateUserUnknownUserException() throws Exception {
         User user4 = new User(4, null, "user4", null, null, null, "password");
