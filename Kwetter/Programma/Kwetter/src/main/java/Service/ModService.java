@@ -2,6 +2,7 @@ package Service;
 
 import DAO.DAOManager;
 import DAO.KweetDAO;
+import DAO.UserDAO;
 import Domain.Group;
 import Domain.Kweet;
 import Domain.User;
@@ -19,6 +20,9 @@ public class ModService {
     @Inject
     KweetDAO kweetDAO;
 
+    @Inject
+    UserDAO userDAO;
+
     /**
      * Lets a mod or admin to change the role of a user
      *
@@ -26,7 +30,7 @@ public class ModService {
      * @param role   the role the user get
      */
     public void changeRole(int userId, String role) throws NullPointerException {
-        User user = DAOManager.userDAO.get(userId);
+        User user = userDAO.get(userId);
 
         if (user == null)
             throw new NullPointerException("Can't find the user!");
@@ -34,7 +38,7 @@ public class ModService {
         Group group = new Group();
         group.setGroupName(role);
         user.setGroup(group);
-        DAOManager.userDAO.update(user);
+        userDAO.update(user);
     }
 
     /**
@@ -43,7 +47,7 @@ public class ModService {
      * @return the list of all users with its roles
      */
     public List<User> getAllUsers() {
-        return DAOManager.userDAO.getAll();
+        return userDAO.getAll();
     }
 
     /**

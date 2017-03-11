@@ -26,6 +26,9 @@ public class KweetDAOTest {
     @Inject
     KweetDAO kweetDAO;
 
+    @Inject
+    RelationDAO relationDAO;
+
     @Before
     public void setUp() throws Exception {
         user1 = new User(1, null, "user1", null, null, null, null);
@@ -38,12 +41,12 @@ public class KweetDAOTest {
         kweet3 = new Kweet(3, "Hey ho!", user2);
         kweetDAO.create(kweet3);
         relation1 = new Relation(user1, user2);
-        DAOManager.relationDAO.follow(relation1);
+        relationDAO.follow(relation1);
     }
 
     @After
     public void tearDown() throws Exception {
-        DAOManager.clearDAOs();
+
     }
 
     @Test

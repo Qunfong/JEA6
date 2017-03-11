@@ -6,6 +6,7 @@ import Domain.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.ArrayList;
@@ -56,9 +57,13 @@ public class KweetDAO {
     }
 
     public Kweet get(int kweetId) {
-        Query query = em.createNamedQuery("kweet.getById");
-        query.setParameter("kweetId", kweetId);
-        return (Kweet) query.getSingleResult();
+        try {
+            Query query = em.createNamedQuery("kweet.getById");
+            query.setParameter("kweetId", kweetId);
+            return (Kweet) query.getSingleResult();
+        } catch (NoResultException ex){
+            return null;
+        }
     }
 
     public void delete(Kweet kweet) {

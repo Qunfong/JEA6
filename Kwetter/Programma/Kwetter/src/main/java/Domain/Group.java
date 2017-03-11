@@ -2,6 +2,7 @@ package Domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -9,6 +10,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "usergroup")
+@NamedQuery(name = "group.all", query = "SELECT g FROM Group g")
 public class Group {
     @Id
     private String groupName;

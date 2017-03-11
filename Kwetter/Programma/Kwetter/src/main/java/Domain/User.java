@@ -24,7 +24,8 @@ public class User {
     private String web;
     @Column(name = "location")
     private String location;
-    @ManyToOne
+    @ManyToOne(targetEntity = Group.class, cascade = CascadeType.MERGE)
+    @JoinColumn(name="groupname", nullable = false)
     private Group group;
     @Column(name = "password")
     private String password;

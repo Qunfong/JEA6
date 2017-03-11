@@ -2,6 +2,7 @@ package Service;
 
 import DAO.DAOManager;
 import DAO.KweetDAO;
+import DAO.UserDAO;
 import Domain.Kweet;
 import Domain.User;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -19,6 +20,9 @@ public class KweetService {
 
     @Inject
     KweetDAO kweetDAO;
+
+    @Inject
+    UserDAO userDAO;
 
     /**
      * Creates a new kweet in the system.
@@ -40,7 +44,7 @@ public class KweetService {
     public void likeKweet(int kweetId, int userId) throws Exception {
         Kweet kweet = kweetDAO.get(kweetId);
 
-        User liker = DAOManager.userDAO.get(userId);
+        User liker = userDAO.get(userId);
 
         if (liker == null)
             throw new NullPointerException("User can't be found.");
@@ -61,7 +65,7 @@ public class KweetService {
      * @throws NullPointerException when the user doesn't exist
      */
     public List<Kweet> getTimeline(int userId) {
-        User user = DAOManager.userDAO.get(userId);
+        User user = userDAO.get(userId);
 
         if (user == null)
             throw new NullPointerException("User doesn't exist!");
@@ -80,7 +84,7 @@ public class KweetService {
      * @throws NullPointerException when the user doesn't exist
      */
     public List<Kweet> latestKweets(int userId, int amount) {
-        User user = DAOManager.userDAO.get(userId);
+        User user = userDAO.get(userId);
 
         if (user == null)
             throw new NullPointerException("User doesn't exist!");

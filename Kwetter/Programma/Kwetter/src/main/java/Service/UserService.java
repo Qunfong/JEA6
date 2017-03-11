@@ -1,10 +1,14 @@
 package Service;
 
 import DAO.DAOManager;
+import DAO.KweetDAO;
+import DAO.RelationDAO;
+import DAO.UserDAO;
 import Domain.Relation;
 import Domain.User;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +19,11 @@ import java.util.List;
 @Stateless
 public class UserService {
 
+    @Inject
+    UserDAO userDAO;
+
+    @Inject
+    RelationDAO relationDAO;
     /**
      * Creates a user of Kwetter in the system.
      *
@@ -27,10 +36,10 @@ public class UserService {
             throw new NullPointerException("Username can't be null!");
         if (user.getPassword() == null || user.getPassword().trim().isEmpty())
             throw new NullPointerException("Password can't be null!");
-        if (DAOManager.userDAO.get(user.getName()) != null || DAOManager.userDAO.get(user.getId()) != null)
+        if (userDAO.get(user.getName()) != null || userDAO.get(user.getId()) != null)
             throw new IllegalArgumentException("User already exists!");
 
-        DAOManager.userDAO.create(user);
+        userDAO.create(user);
     }
 
     /**
@@ -41,19 +50,19 @@ public class UserService {
      * @throws IllegalArgumentException when the username already exist or the group name was different
      */
     public void updateUser(User user) throws NullPointerException, IllegalArgumentException {
-        User userToUpdate = DAOManager.userDAO.get(user.getId());
+        User userToUpdate = userDAO.get(user.getId());
         if (userToUpdate == null)
             throw new NullPointerException("Can't find the requested user to update.");
 
         if (!userToUpdate.getName().equals(user.getName())) {
-            if (DAOManager.userDAO.get(user.getName()) != null)
+            if (userDAO.get(user.getName()) != null)
                 throw new IllegalArgumentException("Username already exists!");
         }
 
         if (!userToUpdate.getGroup().getGroupName().equals(user.getGroup().getGroupName()))
             throw new IllegalArgumentException("There was an attempt to change the group name!");
 
-        DAOManager.userDAO.update(user);
+        userDAO.update(user);
     }
 
     /**
@@ -64,7 +73,7 @@ public class UserService {
      * @return the found user based on the given name
      */
     public User getUser(String name) {
-        return DAOManager.userDAO.get(name);
+        return userDAO.get(name);
     }
 
     /**
@@ -75,7 +84,7 @@ public class UserService {
      * @return the found user based on the given id
      */
     public User getUser(int id) {
-        return DAOManager.userDAO.get(id);
+        return userDAO.get(id);
     }
 
     /**
@@ -86,20 +95,20 @@ public class UserService {
      * @throws Exception when the user follows itself, when a user can't be found or when the user already follows the user
      */
     public void follow(int follower, int following) throws Exception {
-        User followerUser = DAOManager.userDAO.get(follower);
+        User followerUser = userDAO.get(follower);
         if (followerUser == null)
             throw new NullPointerException("Can't find the user that is the follower!");
 
-        User followingUser = DAOManager.userDAO.get(following);
+        User followingUser = userDAO.get(following);
         if (followingUser == null)
             throw new NullPointerException("Can't find the user that is the following!");
 
-        for( Relation relation: DAOManager.relationDAO.getFollowing(followerUser))
+        for( Relation relation: relationDAO.getFollowing(followerUser))
             if (relation.getFollowing().getId() == followingUser.getId())
                 throw new IllegalArgumentException("Follower already follows the following.");
 
         Relation relation = new Relation(followerUser, followingUser);
-        DAOManager.relationDAO.follow(relation);
+        relationDAO.follow(relation);
     }
 
     /**
@@ -109,13 +118,13 @@ public class UserService {
      * @return the list of followers
      */
     public List<User> getFollowers(int following) {
-        User followingUser = DAOManager.userDAO.get(following);
+        User followingUser = userDAO.get(following);
         ArrayList<User> followers = new ArrayList<>();
 
         if (followingUser == null)
             throw new NullPointerException("Following can't be found.");
 
-        for (Relation relation : DAOManager.relationDAO.getFollowers(followingUser))
+        for (Relation relation : relationDAO.getFollowers(followingUser))
             followers.add(relation.getFollower());
 
         return Collections.unmodifiableList(followers);
@@ -128,13 +137,13 @@ public class UserService {
      * @return the list of following users
      */
     public List<User> getFollowing(int follower) {
-        User followerUser = DAOManager.userDAO.get(follower);
+        User followerUser = userDAO.get(follower);
         ArrayList<User> following = new ArrayList<>();
 
         if (followerUser == null)
             throw new NullPointerException("Follower can't be found.");
 
-        for (Relation relation : DAOManager.relationDAO.getFollowing(followerUser))
+        for (Relation relation : relationDAO.getFollowing(followerUser))
             following.add(relation.getFollowing());
 
         return Collections.unmodifiableList(following);

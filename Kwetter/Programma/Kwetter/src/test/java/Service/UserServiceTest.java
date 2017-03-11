@@ -1,6 +1,8 @@
 package Service;
 
 import DAO.DAOManager;
+import DAO.RelationDAO;
+import DAO.UserDAO;
 import Domain.Group;
 import Domain.Relation;
 import Domain.User;
@@ -8,6 +10,8 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import javax.inject.Inject;
 
 import static org.junit.Assert.*;
 
@@ -20,20 +24,26 @@ public class UserServiceTest {
     Relation relation1;
     UserService userService;
 
+    @Inject
+    UserDAO userDAO;
+
+    @Inject
+    RelationDAO relationDAO;
+
     @Before
     public void setUp() throws Exception {
         user1 = new User(1, null, "user1", null, null, null, "password");
         user2 = new User(2, null, "user2", null, null, null, "password");
-        DAOManager.userDAO.create(user1);
-        DAOManager.userDAO.create(user2);
+        userDAO.create(user1);
+        userDAO.create(user2);
         relation1 = new Relation(user1, user2);
-        DAOManager.relationDAO.follow(relation1);
+        relationDAO.follow(relation1);
         userService = new UserService();
     }
 
     @After
     public void tearDown() throws Exception {
-        DAOManager.clearDAOs();
+
     }
 
     @Test

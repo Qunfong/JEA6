@@ -2,6 +2,7 @@ package Service;
 
 import DAO.DAOManager;
 import DAO.KweetDAO;
+import DAO.UserDAO;
 import Domain.Kweet;
 import Domain.User;
 import org.junit.After;
@@ -25,19 +26,22 @@ public class KweetServiceTest {
     @Inject
     KweetDAO kweetDAO;
 
+    @Inject
+    UserDAO userDAO;
+
     @Before
     public void setUp() throws Exception {
         user1 = new User(1, null, "user1", null, null, null, "hoi");
         user2 = new User(2, null, "user2", null, null, null, "hoi");
         kweet1 = new Kweet(1, "Hey people!", user1);
-        DAOManager.userDAO.create(user1);
+        userDAO.create(user1);
         kweetDAO.create(kweet1);
         kweetService = new KweetService();
     }
 
     @After
     public void tearDown() throws Exception {
-        DAOManager.clearDAOs();
+
     }
 
     @Test
