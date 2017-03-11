@@ -1,11 +1,13 @@
 package Service;
 
 import DAO.DAOManager;
+import DAO.KweetDAO;
 import Domain.Group;
 import Domain.Kweet;
 import Domain.User;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -13,6 +15,9 @@ import java.util.List;
  */
 @Stateless
 public class ModService {
+
+    @Inject
+    KweetDAO kweetDAO;
 
     /**
      * Lets a mod or admin to change the role of a user
@@ -47,20 +52,20 @@ public class ModService {
      * @return the list of all kweets
      */
     public List<Kweet> getAllKweets() {
-        return DAOManager.kweetDAO.getAll();
+        return kweetDAO.getAll();
     }
 
     /**
      * Lets a mod or admin delete a kweet
      *
-     * @param kweet the kweet that has to be deleted
+     * @param kweetId the id of the kweet that has to be deleted
      */
     public void deleteKweet(int kweetId) throws NullPointerException {
-        Kweet kweetToDelete = DAOManager.kweetDAO.get(kweetId);
+        Kweet kweetToDelete = kweetDAO.get(kweetId);
 
         if (kweetToDelete == null)
             throw new NullPointerException("Can't find the kweet!");
 
-        DAOManager.kweetDAO.delete(kweetToDelete);
+        kweetDAO.delete(kweetToDelete);
     }
 }

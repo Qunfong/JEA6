@@ -9,19 +9,24 @@ import java.util.HashSet;
  */
 
 @Entity
-@Table(name="kweet")
+@Table(name = "kweet")
+@NamedQueries({@NamedQuery(name = "kweet.timeline", query = "SELECT k FROM Kweet k WHERE k.user = :user OR k.user IN (SELECT r.following FROM Relation r WHERE r.follower = :user) ORDER BY k.date DESC"),
+        @NamedQuery(name = "kweet.latest", query = "SELECT k FROM Kweet k WHERE k.user = :user ORDER BY k.date DESC"),
+        @NamedQuery(name = "kweet.search", query = "SELECT k FROM Kweet k WHERE k.message LIKE CONCAT('%',:keyword,'%')"),
+        @NamedQuery(name = "kweet.all", query = "SELECT k  FROM Kweet k ORDER BY k.date"),
+        @NamedQuery(name = "kweet.getById", query = "SELECT k FROM Kweet k WHERE k.id = :kweetId")})
 public class Kweet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="message")
+    @Column(name = "message")
     private String message;
     @ManyToOne
     private User user;
-    @Column(name="date")
+    @Column(name = "date")
     private Calendar date;
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="likers", joinColumns = @JoinColumn(name="kweet_id"), inverseJoinColumns = @JoinColumn(name="user_id"))
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "likers", joinColumns = @JoinColumn(name = "kweet_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private HashSet<User> likers;
 
     public Kweet() {

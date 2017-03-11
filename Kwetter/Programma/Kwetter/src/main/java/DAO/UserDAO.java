@@ -2,6 +2,10 @@ package DAO;
 
 import Domain.User;
 
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,46 +13,34 @@ import java.util.List;
 /**
  * Created by Joris on 7-3-2017.
  */
+
+@Stateless
 public class UserDAO {
 
-    private ArrayList<User> users;
-
-    public UserDAO() {
-        users = new ArrayList<>();
-    }
+    @PersistenceContext
+    EntityManager em;
 
     public void create(User user) {
-        users.add(user);
+        em.persist(user);
     }
 
     public void update(User user) {
-        User userToRemove = new User();
-        for (User usersUser: users){
-            if (user.getId() == usersUser.getId()) {
-                userToRemove = usersUser;
-            }
-        }
-        users.remove(userToRemove);
-        users.add(user);
+        em.merge(user);
     }
 
     public User get(int id) {
-        for (User user : users) {
-            if (user.getId() == id)
-                return user;
-        }
-        return null;
+        Query query = em.createNamedQuery("user.getById");
+        query.setParameter("userid", id);
+        return (User) query.getSingleResult();
     }
 
     public User get(String name) {
-        for (User user : users) {
-            if (user.getName().equals(name))
-                return user;
-        }
-        return null;
+        Query query = em.createNamedQuery("user.getByName");
+        query.setParameter("username", name);
+        return (User) query.getSingleResult();
     }
 
     public List<User> getAll(){
-            return Collections.unmodifiableList(users);
+            return em.createNamedQuery("user.all").getResultList();
     }
 }

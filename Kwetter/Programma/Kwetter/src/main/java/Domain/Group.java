@@ -2,11 +2,13 @@ package Domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Created by Joris on 3-3-2017.
  */
 @Entity
+@Table(name = "usergroup")
 public class Group {
     @Id
     private String groupName;

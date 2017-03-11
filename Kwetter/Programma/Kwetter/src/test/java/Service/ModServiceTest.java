@@ -1,12 +1,15 @@
 package Service;
 
 import DAO.DAOManager;
+import DAO.KweetDAO;
 import Domain.Kweet;
 import Domain.User;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import javax.inject.Inject;
 
 import static org.junit.Assert.*;
 
@@ -19,6 +22,9 @@ public class ModServiceTest {
     Kweet kweet1;
     ModService modService;
 
+    @Inject
+    KweetDAO kweetDAO;
+
     @Before
     public void setUp() throws Exception {
         user1 = new User(1, null, "user1", null, null, null, "hoi");
@@ -26,7 +32,7 @@ public class ModServiceTest {
         kweet1 = new Kweet(1, "Hey people!", user1);
         DAOManager.userDAO.create(user1);
         DAOManager.userDAO.create(user2);
-        DAOManager.kweetDAO.create(kweet1);
+        kweetDAO.create(kweet1);
         modService = new ModService();
     }
 

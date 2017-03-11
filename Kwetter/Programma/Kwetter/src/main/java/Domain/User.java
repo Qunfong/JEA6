@@ -6,6 +6,10 @@ import javax.persistence.*;
  * Created by Joris on 3-3-2017.
  */
 @Entity
+@Table(name = "kweetuser")
+@NamedQueries({@NamedQuery(name = "user.all", query = "SELECT u FROM User u"),
+        @NamedQuery(name = "user.getById", query = "SELECT u FROM User u WHERE u.id = :userid"),
+        @NamedQuery(name = "user.getByName", query = "SELECT u FROM User u WHERE u.name = :username")})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
