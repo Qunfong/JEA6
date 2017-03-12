@@ -3,56 +3,103 @@ package Service;
 import DAO.DAOManager;
 import DAO.KweetDAO;
 import DAO.UserDAO;
+import Domain.Group;
 import Domain.Kweet;
 import Domain.User;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Joris on 9-3-2017.
  */
+@RunWith(MockitoJUnitRunner.class)
 public class KweetServiceIT {
     User user1;
     User user2;
+
+    private static EntityManagerFactory entityManagerFactory;
+    EntityManager entityManager;
+
     Kweet kweet1;
+
+    @InjectMocks
     KweetService kweetService;
 
-    @Inject
+    @Mock
     KweetDAO kweetDAO;
 
-    @Inject
+    @Mock
     UserDAO userDAO;
 
     @Before
     public void setUp() throws Exception {
+        entityManagerFactory = Persistence.createEntityManagerFactory("TestDB");
+
         user1 = new User(1, null, "user1", null, null, null, "hoi");
         user2 = new User(2, null, "user2", null, null, null, "hoi");
         kweet1 = new Kweet(1, "Hey people!", user1);
-        userDAO.create(user1);
-        kweetDAO.create(kweet1);
+
+        List<Kweet> kweetList = new ArrayList<>();
+        kweetList.add(kweet1);
+
+        entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        entityManager.persist(new Group());
+        entityManager.persist(user1);
+        entityManager.persist(user2);
+        entityManager.persist(kweet1);
+
+        entityManager.getTransaction().commit();
+
         kweetService = new KweetService();
+
+        when(userDAO.get(1)).thenReturn(user1);
+        when(userDAO.get(2)).thenReturn(user2);
+        when(userDAO.get(20)).thenReturn(null);
+        when(kweetDAO.get(1)).thenReturn(kweet1);
+        when(kweetDAO.get(20)).thenReturn(null);
+        when(kweetDAO.timeline(user1)).thenReturn(kweetList);
+        when(kweetDAO.latest(user1, 1)).thenReturn(kweetList);
+        when(kweetDAO.search("PEOPLE")).thenReturn(kweetList);
     }
 
     @After
     public void tearDown() throws Exception {
-
+        ClearDB.resetDB();
     }
 
     @Test
     public void createKweet() throws Exception {
         Kweet kweet2 = new Kweet(2, "Hey all!", user1);
         kweetService.createKweet(kweet2);
+        Mockito.verify(kweetDAO, Mockito.times(1)).create(kweet2);
     }
 
     @Test
     public void likeKweet() throws Exception {
         kweetService.likeKweet(1, 1);
+        Mockito.verify(userDAO, Mockito.times(1)).get(1);
+        Mockito.verify(kweetDAO, Mockito.times(1)).get(1);
+        Mockito.verify(kweetDAO, Mockito.times(1)).like(kweet1, user1);
     }
 
     @Test(expected = Exception.class)
