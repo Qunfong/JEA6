@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Joris on 9-3-2017.
  */
-public class UserServiceTest {
+public class UserServiceIT {
     User user1;
     User user2;
     Relation relation1;

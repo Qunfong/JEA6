@@ -16,7 +16,6 @@ public class MyApplication extends Application{
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
         addRestResourceClasses(resources);
-        resources.add(HelloEmployee.class);
         resources.add(UserREST.class);
         resources.add(KweetREST.class);
         resources.add(ModREST.class);
