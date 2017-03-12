@@ -8,6 +8,7 @@ import Service.UserService;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -24,14 +25,14 @@ public class UserREST {
     @POST
     @Consumes("application/json")
     @Path("create")
-    public void create(final UserJSON input) {
+    public void create(final UserJSON input) throws NoSuchAlgorithmException {
         userService.createUser(new User(input.id, input.photo, input.username, input.bio, input.web, input.location, input.password));
     }
 
     @PUT
     @Consumes("application/json")
     @Path("update")
-    public void update(final UserJSON input) {
+    public void update(final UserJSON input) throws NoSuchAlgorithmException {
         userService.updateUser(new User(input.id, input.photo, input.username, input.bio, input.web, input.location, input.password));
     }
 

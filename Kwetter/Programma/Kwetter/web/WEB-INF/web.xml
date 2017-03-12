@@ -3,4 +3,42 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <security-constraint>
+        <display-name>Users</display-name>
+        <web-resource-collection>
+            <web-resource-name>User</web-resource-name>
+            <url-pattern>/api/user/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>User</role-name>
+            <role-name>Moderator</role-name>
+            <role-name>Admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <display-name>CreateUsers</display-name>
+        <web-resource-collection>
+            <web-resource-name>User</web-resource-name>
+            <url-pattern>/api/user/create</url-pattern>
+        </web-resource-collection>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>kwetter</realm-name>
+    </login-config>
+
+    <security-role>
+        <description>All users that are authenticated</description>
+        <role-name>User</role-name>
+    </security-role>
+    <security-role>
+        <description>All users that are authenticated and are moderator</description>
+        <role-name>Moderator</role-name>
+    </security-role>
+    <security-role>
+        <description>All users that are authenticated and are moderator and admin</description>
+        <role-name>Admin</role-name>
+    </security-role>
 </web-app>
