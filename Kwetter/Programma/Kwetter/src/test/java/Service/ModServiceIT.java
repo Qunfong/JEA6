@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Joris on 9-3-2017.
  */
-public class ModServiceTest {
+public class ModServiceIT {
     User user1;
     User user2;
     Kweet kweet1;

@@ -9,6 +9,7 @@ import Service.UserService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import javax.ws.rs.*;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class KweetREST {
     @POST
     @Consumes("application/json")
     @Path("create")
+    @Interceptors(Interceptor.class)
     public void create(final KweetJSON input) {
         User kweetUser = userService.getUser(input.userId);
         if(kweetUser == null)
