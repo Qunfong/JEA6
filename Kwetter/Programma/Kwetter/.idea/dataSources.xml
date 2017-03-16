@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="examplesDB@JORIS_LAPTOP" uuid="272a1180-611e-4eb4-ba77-ea99380b68e7">
+      <driver-ref>sqlserver.ms</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://JORIS_LAPTOP\SQLSERVER;databaseName=examplesDB</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="SCHOOL" uuid="b82b70c6-53d0-4a1a-a2a5-f648179b83dd">
+      <driver-ref>sqlserver.ms</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://mssql.fhict.local</jdbc-url>
+    </data-source>
+  </component>
+</project>
