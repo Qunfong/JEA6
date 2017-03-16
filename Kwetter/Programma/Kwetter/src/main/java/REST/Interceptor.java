@@ -21,8 +21,9 @@ public class Interceptor {
         FileInputStream fis = new FileInputStream("E:\\woord.txt");
         BufferedReader br = new BufferedReader(new InputStreamReader(fis));
 
-        String line = null;
-        while ((line = br.readLine()) != null) {
+        String line;
+
+        while (( line = br.readLine()) != null) {
             String[] originalAndReplaceWord = line.split(";");
             kweet.message = kweet.message.replaceAll(originalAndReplaceWord[0], originalAndReplaceWord[1]);
         }

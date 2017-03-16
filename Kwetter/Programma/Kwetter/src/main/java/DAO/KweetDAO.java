@@ -1,17 +1,14 @@
 package DAO;
 
 import Domain.Kweet;
-import Domain.Relation;
 import Domain.User;
+import com.sun.media.jfxmedia.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
