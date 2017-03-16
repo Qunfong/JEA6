@@ -1,96 +1,69 @@
 package DAO;
 
 import Domain.Kweet;
-import Domain.Relation;
 import Domain.User;
+import com.sun.media.jfxmedia.logging.Logger;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 /**
  * Created by Joris on 7-3-2017.
  */
+
+@Stateless
 public class KweetDAO {
 
-    private ArrayList<Kweet> kweets;
-
-    public KweetDAO() {
-        kweets = new ArrayList<>();
-    }
+    @PersistenceContext
+    EntityManager em;
 
     public void create(Kweet kweet) {
-        kweets.add(kweet);
+        em.persist(kweet);
     }
 
     public void like(Kweet kweet, User user) throws Exception {
-        for (Kweet kweetListItem : kweets) {
-            if (kweetListItem.getId() == kweet.getId())
-                kweetListItem.addLiker(user);
-        }
+        kweet.addLiker(user);
+        em.merge(kweet);
     }
 
     public List<Kweet> timeline(User user) {
-        ArrayList<Kweet> timelineKweets = new ArrayList<>();
-        ArrayList<User> followingUsers = new ArrayList<>();
-        for(Relation relation: DAOManager.relationDAO.getFollowing(user)){
-            followingUsers.add(relation.getFollowing());
-        }
-
-        for (Kweet kweet : kweets) {
-            if (kweet.getUser().equals(user) || followingUsers.contains(kweet.getUser()))
-                timelineKweets.add(kweet);
-        }
-        return Collections.unmodifiableList(timelineKweets);
+        Query query = em.createNamedQuery("kweet.timeline");
+        query.setParameter("user", user);
+        return query.getResultList();
     }
 
-    public List<Kweet> latest(User user, int amount){
-        ArrayList<Kweet> userKweets = new ArrayList<>();
-
-        for (Kweet kweet: kweets){
-            if (kweet.getUser().equals(user))
-                userKweets.add(kweet);
-        }
-
-        Collections.sort(userKweets, new Comparator<Kweet>() {
-            @Override
-            public int compare(Kweet o1, Kweet o2) {
-                if (o1.getDate() == null || o2.getDate() == null)
-                    return 0;
-                return o2.getDate().compareTo(o1.getDate());
-            }
-        });
-
-        if(amount <= 0 || userKweets.size() <= amount)
-            return Collections.unmodifiableList(userKweets);
-
-        return Collections.unmodifiableList(userKweets.subList(0, amount));
+    public List<Kweet> latest(User user, int amount) {
+        Query query = em.createNamedQuery("kweet.latest");
+        query.setParameter("user", user);
+        query.setMaxResults(amount);
+        return query.getResultList();
     }
 
     public List<Kweet> search(String keyword) {
-        ArrayList<Kweet> foundKweets = new ArrayList<>();
-        for (Kweet kweet : kweets) {
-            if (kweet.getMessage().toLowerCase().contains(keyword.toLowerCase()))
-                foundKweets.add(kweet);
-        }
-        return Collections.unmodifiableList(foundKweets);
+        Query query = em.createNamedQuery("kweet.search");
+        query.setParameter("keyword", keyword);
+        return query.getResultList();
     }
 
     public List<Kweet> getAll() {
-        return Collections.unmodifiableList(kweets);
+        return em.createNamedQuery("kweet.all").getResultList();
     }
 
-    public Kweet get(int kweetId){
-        for (Kweet kweet: kweets){
-            if(kweet.getId() == kweetId){
-                return kweet;
-            }
+    public Kweet get(int kweetId) {
+        try {
+            Query query = em.createNamedQuery("kweet.getById");
+            query.setParameter("kweetId", kweetId);
+            return (Kweet) query.getSingleResult();
+        } catch (NoResultException ex){
+            return null;
         }
-        return null;
     }
 
     public void delete(Kweet kweet) {
-        kweets.remove(kweet);
+        em.remove(kweet);
     }
 }

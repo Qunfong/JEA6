@@ -1,17 +1,28 @@
 package Service;
 
 import DAO.DAOManager;
+import DAO.KweetDAO;
+import DAO.UserDAO;
 import Domain.Kweet;
 import Domain.User;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.validation.constraints.Null;
 import java.util.List;
 
 /**
  * Created by Joris on 4-3-2017.
  */
+@Stateless
 public class KweetService {
+
+    @Inject
+    KweetDAO kweetDAO;
+
+    @Inject
+    UserDAO userDAO;
 
     /**
      * Creates a new kweet in the system.
@@ -19,7 +30,7 @@ public class KweetService {
      * @param kweet to be created.
      */
     public void createKweet(Kweet kweet) {
-        DAOManager.kweetDAO.create(kweet);
+        kweetDAO.create(kweet);
     }
 
     /**
@@ -31,9 +42,9 @@ public class KweetService {
      * @throws NullPointerException when the user or kweet doesn't exist
      */
     public void likeKweet(int kweetId, int userId) throws Exception {
-        Kweet kweet = DAOManager.kweetDAO.get(kweetId);
+        Kweet kweet = kweetDAO.get(kweetId);
 
-        User liker = DAOManager.userDAO.get(userId);
+        User liker = userDAO.get(userId);
 
         if (liker == null)
             throw new NullPointerException("User can't be found.");
@@ -54,12 +65,12 @@ public class KweetService {
      * @throws NullPointerException when the user doesn't exist
      */
     public List<Kweet> getTimeline(int userId) {
-        User user = DAOManager.userDAO.get(userId);
+        User user = userDAO.get(userId);
 
         if (user == null)
             throw new NullPointerException("User doesn't exist!");
 
-        return DAOManager.kweetDAO.timeline(user);
+        return kweetDAO.timeline(user);
     }
 
     /**
@@ -73,12 +84,12 @@ public class KweetService {
      * @throws NullPointerException when the user doesn't exist
      */
     public List<Kweet> latestKweets(int userId, int amount) {
-        User user = DAOManager.userDAO.get(userId);
+        User user = userDAO.get(userId);
 
         if (user == null)
             throw new NullPointerException("User doesn't exist!");
 
-        return DAOManager.kweetDAO.latest(user, amount);
+        return kweetDAO.latest(user, amount);
     }
 
     /**
@@ -88,6 +99,6 @@ public class KweetService {
      * @return the kweets where the message match the keyword
      */
     public List<Kweet> searchKweet(String keyword) {
-        return DAOManager.kweetDAO.search(keyword);
+        return kweetDAO.search(keyword);
     }
 }

@@ -112,14 +112,14 @@ public class UserTest {
 
     @Test
     public void getPassword() throws Exception {
-        Assert.assertEquals("User1 didn't have the password ww1", "ww1", user1.getPassword());
-        Assert.assertEquals("User2 didn't have the password ww2.", "ww2", user2.getPassword());
+        Assert.assertEquals("User1 didn't have the password ww1", "a265286d677b4b77689c84d85ae7fd88a77a2a31b054ac5541bca1ebabc4040d", user1.getPassword());
+        Assert.assertEquals("User2 didn't have the password ww2.", "151bacff996cb5510986f9d2e13a7c2412618456da6acee7693f64d8e62092aa", user2.getPassword());
         Assert.assertNull("User3 had a password when there shouldn't be one.", user3.getPassword());
     }
 
     @Test
     public void setPassword() throws Exception {
         user3.setPassword("ww3");
-        Assert.assertEquals("Password isn't correctly set to the user.", "ww3", user3.getPassword());
+        Assert.assertEquals("Password isn't correctly set to the user.", "8fe5178ece480a254916d473550f6ebda5c35e0d701fd0f792721dedd9956f3a", user3.getPassword());
     }
 }
