@@ -28,6 +28,8 @@ public class Interceptor {
         }
         parameters[0] = kweet;
         context.setParameters(parameters);
+
+        fis.close();
         return context.proceed();
     }
 }
