@@ -1,7 +1,5 @@
 package Service;
 
-import DAO.DAOManager;
-import DAO.KweetDAO;
 import DAO.RelationDAO;
 import DAO.UserDAO;
 import Domain.Relation;
@@ -14,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by Joris on 4-3-2017.
+ * Created by Qun on 28-2-2018.
  */
 @Stateless
 public class UserService {

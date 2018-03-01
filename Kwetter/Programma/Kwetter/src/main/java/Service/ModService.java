@@ -1,6 +1,5 @@
 package Service;
 
-import DAO.DAOManager;
 import DAO.KweetDAO;
 import DAO.UserDAO;
 import Domain.Group;
@@ -12,7 +11,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 /**
- * Created by Joris on 4-3-2017.
+ * Created by Qun on 28-2-2018.
  */
 @Stateless
 public class ModService {

@@ -1,19 +1,16 @@
 package Service;
 
-import DAO.DAOManager;
 import DAO.KweetDAO;
 import DAO.UserDAO;
 import Domain.Kweet;
 import Domain.User;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.validation.constraints.Null;
 import java.util.List;
 
 /**
- * Created by Joris on 4-3-2017.
+ * Created by Qun on 28-2-2018.
  */
 @Stateless
 public class KweetService {

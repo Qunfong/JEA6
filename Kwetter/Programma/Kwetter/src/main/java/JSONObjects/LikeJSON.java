@@ -3,7 +3,7 @@ package JSONObjects;
 import javax.xml.bind.annotation.XmlElement;
 
 /**
- * Created by Joris on 9-3-2017.
+ * Created by Qun on 28-2-2018.
  */
 public class LikeJSON {
     @XmlElement public int userId;

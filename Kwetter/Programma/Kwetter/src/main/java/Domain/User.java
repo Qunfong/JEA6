@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Created by Joris on 3-3-2017.
+ * Created by Qun on 28-2-2018.
  */
 @Entity
 @Table(name = "kweetuser")

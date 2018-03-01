@@ -12,7 +12,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 /**
- * Created by Joris on 7-3-2017.
+ * Created by Qun on 28-2-2018.
  */
 
 @Stateless

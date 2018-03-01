@@ -14,7 +14,7 @@ import javax.ws.rs.*;
 import java.util.List;
 
 /**
- * Created by Joris on 9-3-2017.
+ * Created by Qun on 28-2-2018.
  */
 @Stateless
 @Path("kweet")
@@ -28,7 +28,6 @@ public class KweetREST {
     @POST
     @Consumes("application/json")
     @Path("create")
-    @Interceptors(Interceptor.class)
     public void create(final KweetJSON input) {
         User kweetUser = userService.getUser(input.userId);
         if(kweetUser == null)
@@ -43,24 +42,26 @@ public class KweetREST {
         kweetService.likeKweet(input.kweetId, input.userId);
     }
 
-    @GET
-    @Produces("application/json")
-    @Path("timeline")
-    public List<Kweet> getTimeline(@QueryParam("user") int userId) {
-        return kweetService.getTimeline(userId);
-    }
-
-    @GET
-    @Produces("application/json")
-    @Path("latest")
-    public List<Kweet> getLatest(@QueryParam("user") int userId, @QueryParam("amount") int amount){
-        return kweetService.latestKweets(userId, amount);
-    }
-
-    @GET
-    @Produces("application/json")
-    @Path("search")
-    public List<Kweet> search(@QueryParam("keyword") String keyword){
-        return kweetService.searchKweet(keyword);
-    }
+    //    @Interceptors(Interceptor.class)
+//
+//    @GET
+//    @Produces("application/json")
+//    @Path("timeline")
+//    public List<Kweet> getTimeline(@QueryParam("user") int userId) {
+//        return kweetService.getTimeline(userId);
+//    }
+//
+//    @GET
+//    @Produces("application/json")
+//    @Path("latest")
+//    public List<Kweet> getLatest(@QueryParam("user") int userId, @QueryParam("amount") int amount){
+//        return kweetService.latestKweets(userId, amount);
+//    }
+//
+//    @GET
+//    @Produces("application/json")
+//    @Path("search")
+//    public List<Kweet> search(@QueryParam("keyword") String keyword){
+//        return kweetService.searchKweet(keyword);
+//    }
 }
